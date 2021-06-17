@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promise test</title>
+</head>
+<body>
+
+    <script>
+
+        function fetchData(val, timeout) {
+            return new Promise((resolve) => {
+                setTimeout(()=>{
+                    resolve(val)
+                }, timeout)
+            })
+        }
+
+        // 链式调用
+        const p = new Promise((resolve) => {
+            resolve(123)
+        }).then(()=>{
+            return 231424142
+        }).then((res)=>{
+            console.log(res)
+        })
+
+        // race
+        const p1 = fetchData(1, 1000) 
+        const p2 = fetchData(2, 2000)
+        const p3 = fetchData(3, 500)
+
+        Promise.race([p1, p2, p3]).then(res=>{
+            console.log(res)
+        })
+
+        
+
+    </script>
+    
+</body>
+</html>

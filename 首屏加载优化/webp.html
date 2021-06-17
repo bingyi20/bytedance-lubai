@@ -7,6 +7,43 @@
     <title>webp检测</title>
 </head>
 <body>
-    
+    <script>
+        /**
+         * 检测浏览器是否支持webp图片格式 
+         */
+        function checkWebp() {
+            try{
+                console.log(document.createElement("canvas").toDataURL("image/webp"))
+                return document.createElement("canvas").toDataURL("image/webp").indexOf("data:image/webp") == 0;
+            }catch(e) {
+                return false;
+            }
+        }
+        const supportWebp = checkWebp()
+
+        function getWebpUrl(url) {
+            // 检测链接是否为空
+            if(url == "") {
+                throw Error("图片地址不能为空")
+                return url
+            }
+            // 检测链接是否为base64
+            if(url.indexOf("data:") == 0) {
+                return url
+            }
+            // 检测浏览器是否支持webp(webp是一个比较新的特性，并非所有浏览器都支持)
+            if(!supportWebp) {
+                return url
+            }
+
+            if (url.indexOf("?") < 0) {
+                return url + '?x-oss'
+            }else{
+                return url + '&x-oss'
+            }
+        }
+
+
+    </script>
 </body>
 </html>
