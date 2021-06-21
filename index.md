@@ -118,3 +118,43 @@ measure.js
 
 
 ## 8. 平时用过发布-订阅模式吗？比如vue中的event bus， node中的eventemitter,手写一个Event bus吧
+
+
+## 9. 01背包
+
+## 9. webpack，请查看webpack目录
+
+
+
+## 10. 给定如下对象，描述了模块之间的依赖关系，实现sortByDep将其排序，使得被依赖模块排在依赖模块之前
+```js
+    let modules = [
+    { name: 'a', requires: ['b', 'c'] },
+    { name: 'b', requires: ['c'] },
+    { name: 'c', requires: [] },
+    ]
+
+    let output = []
+    let registeredModules = []
+    function sortByDep(modules) {
+        modules.sort((x,y) => {
+            if(x.requires.indexOf(y) > -1) {
+                return 1;
+            }else{
+                return -1;
+            }
+        })
+    }
+
+    sortByDep(modules)
+
+    console.log(modules)
+
+    // output
+    [
+        { name: 'c', requires: [] }, // first, no dependencies, and required by both the others
+        { name: 'b', requires: ['c'] }, // second, because it needs `c` first
+        { name: 'a', requires: ['b', 'c'] }, // last, because requires both the others
+    ]
+```
+
